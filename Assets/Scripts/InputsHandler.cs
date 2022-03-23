@@ -64,7 +64,7 @@ public class InputsHandler : MonoBehaviour
             isDragging = false;
             blockService.PlaceSelectedBlock();
             blockService.ProblemBlockStripesPosCheck();
-            blockService.SetSelectedBlock(null);    //resetting selected block back to null
+
         }
     }
 }

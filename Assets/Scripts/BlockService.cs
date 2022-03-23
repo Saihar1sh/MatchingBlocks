@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockService : MonoBehaviour
@@ -20,18 +21,15 @@ public class BlockService : MonoBehaviour
     }
     #endregion
 
-    public Canvas mainCanvas;
+    public List<Vector3> blockPlaceHolderPos;
 
-    public List<Vector3> blockPlaceHolderPos, occupiedBlockPlaces;
-
-    private BlockController selectedBlock, previousBlock;
+    private BlockController selectedBlock, previousBlock, lastSelectedBlock;
 
     public ProblemBoxScript problemBoxScript;
 
     public List<BlockController> solutionBlocks;
 
     public BlockController[] movableBlocks; 
-    private BlockController[] problemBlocks;
 
     public Transform[] solBoxs;
 
@@ -39,31 +37,31 @@ public class BlockService : MonoBehaviour
 
     private Vector3 inventoryBlocksStartPos;
 
-    public float[] problemBlockXPos;        // position of x positions of problem blocks 
+    public Vector3[] problemBlockPos;
+    public List<float> problemBlockXpos; // position of x positions of problem blocks 
 
     public Transform movableBlocksStart, movableBlocksParent;
 
     public float yPosDiff;
 
+    public StripeController stripePrefab;
 
-    GameObject[,] stripeParents;
+    Transform[,] stripeParents;
 
     private void Awake()
     {
         SingletonInstantiate();
-        problemBlockXPos = new float[3];    // only 3 problem blocks will be present
-        problemBlocks = new BlockController[3];
+        //problemBlocks = new BlockController[3];
+        problemBlockPos = new Vector3[3];    // only 3 problem blocks will be present
+        problemBlockXpos = new List<float>(3);
         solBlocksPositions = new Vector3[solBoxs.Length,3];
-        stripeParents = new GameObject[solBoxs.Length, 3];
+        stripeParents = new Transform[solBoxs.Length, 3];
         movableBlocks = movableBlocksParent.GetComponentsInChildren<BlockController>();
 
         inventoryBlocksStartPos = movableBlocksStart.position;
-
-/*        for (int i = 0; i < ; i++)
-        {
-
-        }
-*/    }
+        lastSelectedBlock = null;
+        previousBlock = null;
+    }
 
     private void Start()
     {
@@ -72,7 +70,7 @@ public class BlockService : MonoBehaviour
         {
             for (int j = 0; j < 3; j++)
             {
-                Vector3 solBlocksLocation = new Vector3(problemBlockXPos[j], solBoxs[i].position.y);
+                Vector3 solBlocksLocation = new Vector3(problemBlockPos[j].x, solBoxs[i].position.y);
                 //all block place holders are slots in which blocks can be placed
                 AddBlockPlaceHolderPositions(solBlocksLocation);
                 
@@ -110,29 +108,32 @@ public class BlockService : MonoBehaviour
     }
     public void ProblemBlockStripesPosCheck()
     {
+        problemBoxScript.solvedBlocksCount = 0;
         for (int i = 0; i < solBoxs.Length; i++)
         {
             for (int j = 0; j < 3; j++)
             {
                 BlockController blockController = GetBlockByPosition(solBlocksPositions[i, j]);
                 //adding new stripe positions to problem block
-                if (blockController && !blockController.addedStripes)
+                if (blockController)
                 {
-                    stripeParents[i,j] = new GameObject("Added Stripes");
-                    stripeParents[i,j].transform.parent = blockController.transform;
-                    stripeParents[i,j].transform.localPosition = Vector3.zero;
-
-                    problemBoxScript.AddNewStripes(j,stripeParents[i,j].transform,blockController.stripeObjectsXpos);
-                    blockController.addedStripes = true;
+                    //stripeParents[i, j] = blockController.stripeParent;
+                    //stripeParents[i, j].gameObject.SetActive(true);
+                    stripeParents[i,j] = problemBoxScript.AddNewStripes(i,j,blockController.stripeObjectsXpos);
                     previousBlock = blockController;
                 }
                 else
                 {
-                    //destroy new stripes
-                    Destroy(stripeParents[i, j]);
-                    previousBlock.addedStripes = false;
+                    try
+                    {
+                        stripeParents[i,j].gameObject.SetActive(false);
+                    }
+                    catch(NullReferenceException ex)
+                    {
+                        Debug.Log("There is no object in the desired index");
+                    }
+                    //Destroy(stripeParents[i, j]);
                 }
-                //problemBlocks[j]. =  blockController.stripeObjectsXpos;
             }
         }
     }
@@ -164,10 +165,6 @@ public class BlockService : MonoBehaviour
 
         }
     }
-    public void AssignProblemBlocks(BlockController[] blocks)
-    {
-        problemBlocks = blocks;
-    }
 
     private void MotionofBlocksWithMouseInput()
     {
@@ -187,9 +184,28 @@ public class BlockService : MonoBehaviour
     public void PlaceSelectedBlock()
     {
         selectedBlock.PlaceBlock();
+
+
+
+        if (selectedBlock.desiredPos.x < -5f)        //$@
+        {
+            if (!solutionBlocks.Contains(selectedBlock))
+                solutionBlocks.Add(selectedBlock);
+        }
+        else
+        {
+            if (solutionBlocks.Contains(selectedBlock))
+                solutionBlocks.Remove(selectedBlock);
+
+            RefreshInventoryList();
+        }
+
+        SetSelectedBlock(null);    //resetting selected block back to null
     }
     public void SetSelectedBlock(BlockController block)
     {
+        
+        lastSelectedBlock = selectedBlock;
         selectedBlock = block;
     }
 

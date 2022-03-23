@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BlockController : MonoBehaviour
 { 
-    public float[] stripeObjectsXpos;
+    public List<float> stripeObjectsXpos;
 
     private int index =0;
 
@@ -16,56 +16,72 @@ public class BlockController : MonoBehaviour
 
     public StripeController[] stripes;
 
+    public StripeController[,] newStripes;
+
     public Vector3 lastPlacedLocation { get; private set; }
 
-    public Vector3 desiredPos;
+    public Vector3 desiredPos { get; private set; }
 
     public bool addedStripes =false;
+
+    public SpriteRenderer[,] stripeSprites;
+
+    private int solBoxLength;
+
+    public GameObject[] stripeParent;
 
     private void Awake()
     {
         stripes = GetComponentsInChildren<StripeController>();
-        stripeObjectsXpos = new float[stripes.Length];
+        stripeObjectsXpos = new List<float>(stripes.Length);
     }
     private void Start()
     {
+        addedStripes = false;
+        for (int i = 0; i < stripes.Length; i++)
+        {
+            stripeObjectsXpos.Add( stripes[i].transform.localPosition.x);
+        }
         blockService = BlockService.Instance;
+        solBoxLength = blockService.solBoxs.Length;
+
+        stripeParent = new GameObject[solBoxLength];
+        newStripes = new StripeController[solBoxLength, stripes.Length];
+        stripeSprites = new SpriteRenderer[solBoxLength, stripes.Length];
+
+        if (gameObject.layer == 10)                     //problem blocks
+        {
+            for (int i = 0; i < solBoxLength; i++)
+            {
+                stripeParent[i] = new GameObject("Added Stripes"+i);
+                stripeParent[i].transform.parent = this.transform;
+                stripeParent[i].transform.localPosition = Vector3.zero;
+                stripeParent[i].gameObject.SetActive(false);
+
+                for (int j = 0; j < stripes.Length; j++)
+                {
+                    newStripes[i,j] = Instantiate(blockService.stripePrefab, stripeParent[i].transform);
+                    stripeSprites[i, j] = newStripes[i,j].GetComponent<SpriteRenderer>();
+                    newStripes[i,j].gameObject.SetActive(false);
+                }
+
+            }
+
+        }
+
+
+
         //lastPlacedLocation = Vector3.negativeInfinity;              //using as null value. As I can't use origin (as it is also a position).
         lastPlacedLocation = desiredPos = transform.position;
     }
-    private void OnEnable()
-    {
-        for (int i = 0; i < stripes.Length; i++)
-        {
-            stripeObjectsXpos[i] = stripes[i].transform.localPosition.x;
-        }
 
-        //rectTransform = GetComponent<RectTransform>();
-        //canvasScaleFactor = blockService.mainCanvas.scaleFactor;
-        index = 0;
-
-/*        if (gameObject.layer == 9)       //problem box layer
-        {
-            blockService.problemBlocks.Add(this);
-        }
-        else
-        {
-            blockService.solutionBlocks.Add(this);
-        }
-*/
-    }
 
     //Adding stripe object's x co-ordinate into an array(local postion)
-    public void AddStripeXpos(Transform stripe)
-    {
-        stripeObjectsXpos[index] = stripe.localPosition.x;
-        index++;
-    }
     public void GetNearestPosition()
     {
         foreach (Vector3 item in blockService.blockPlaceHolderPos)
         {
-            Debug.Log("Dist :" + item + " :-" + Mathf.Abs(Vector3.Distance(item, transform.position)));
+            //Debug.Log("Dist :" + item + " :-" + Mathf.Abs(Vector3.Distance(item, transform.position)));
 
             if (Mathf.Abs( Vector3.Distance(item, transform.position)) <= .5f)
             {
@@ -88,36 +104,8 @@ public class BlockController : MonoBehaviour
             lastPlacedLocation = desiredPos;
 
         }
-        if(desiredPos.x > -5f)        //$@
-        {
-            BlockController block = blockService.GetBlockByPosition(desiredPos);
-            if (!blockService.solutionBlocks.Contains(block))
-                blockService.solutionBlocks.Add(block);
-        }
-        else
-        {
-            blockService.RefreshInventoryList();
-        }
-            blockService.blockPlaceHolderPos.Remove(lastPlacedLocation);            //so that other blocks can't be placed in the same location
+        blockService.blockPlaceHolderPos.Remove(lastPlacedLocation);            //so that other blocks can't be placed in the same location
+
     }
 
-/*    public void OnDrag(PointerEventData eventData)
-    {
-        rectTransform.anchoredPosition += eventData.delta / canvasScaleFactor;
-        //throw new System.NotImplementedException();
-    }
-*/
-    /*    private void OnDisable()
-        {
-            if (gameObject.layer == 9)       //problem box layer
-            {
-                blockService.problemBlocks.Remove(this);
-            }
-            else
-            {
-                blockService.solutionBlocks.Remove(this);
-            }
-
-        }
-    */
 }

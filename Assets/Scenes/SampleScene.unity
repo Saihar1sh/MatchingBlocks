@@ -360,8 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &226066172
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -583,8 +583,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &260781400
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429364903}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.84, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 629083656}
@@ -1098,7 +1098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &583496849
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,7 +1295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611102505}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 226066170}
@@ -1414,8 +1414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &629083658
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1573,6 +1573,100 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &808841999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808842000}
+  - component: {fileID: 808842002}
+  - component: {fileID: 808842001}
+  m_Layer: 0
+  m_Name: FixingLine_black (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &808842000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808841999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.05, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1647265602}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808842001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808841999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a57cc83b68b404eb4dfe086c3bcc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &808842002
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808841999}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c5c54207405f4e54781a23a0fd3fd93e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.14, y: 1.02}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &831878849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831878849}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 629083656}
@@ -1693,7 +1787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834721933}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -0.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 226066170}
@@ -1787,7 +1881,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850323844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.96, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 226066170}
@@ -1975,7 +2069,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938206803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 629083656}
@@ -2154,7 +2248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &992715202
 Transform:
   m_ObjectHideFlags: 0
@@ -2632,8 +2726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &1066163956
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2859,7 +2953,7 @@ GameObject:
   - component: {fileID: 1256966310}
   - component: {fileID: 1256966311}
   - component: {fileID: 1256966312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BlueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2948,8 +3042,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!61 &1256966312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3027,8 +3121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &1300933430
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3292,7 +3386,7 @@ GameObject:
   - component: {fileID: 1547411007}
   - component: {fileID: 1547411008}
   - component: {fileID: 1547411009}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BlueBox (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3381,8 +3475,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!61 &1547411009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3613,19 +3707,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0ba82d1b23aa242972a8c315d05325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCanvas: {fileID: 0}
   blockPlaceHolderPos: []
-  occupiedBlockPlaces: []
   problemBoxScript: {fileID: 1661834486}
   solutionBlocks: []
   movableBlocks: []
   solBoxs:
   - {fileID: 328083507}
   - {fileID: 2035910990}
-  problemBlockXPos: []
+  problemBlockPos: []
+  problemBlockXpos: []
   movableBlocksStart: {fileID: 226066170}
   movableBlocksParent: {fileID: 1883041425}
   yPosDiff: 1.5
+  stripePrefab: {fileID: 7060502179385570083, guid: 9cf40463f3a86824d9819f5e0eff554b,
+    type: 3}
 --- !u!4 &1615051137
 Transform:
   m_ObjectHideFlags: 0
@@ -3652,7 +3747,7 @@ GameObject:
   - component: {fileID: 1647265603}
   - component: {fileID: 1647265604}
   - component: {fileID: 1647265605}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BlueBox (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3674,6 +3769,7 @@ Transform:
   - {fileID: 1550716886}
   - {fileID: 1673273830}
   - {fileID: 998213599}
+  - {fileID: 808842000}
   m_Father: {fileID: 1661834485}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3741,8 +3837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!61 &1647265605
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3866,9 +3962,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69dbbd60dd6c35f45a690b1b650e7cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixingLines: []
-  stripePrefab: {fileID: 7060502179385570083, guid: 9cf40463f3a86824d9819f5e0eff554b,
-    type: 3}
+  fixingLines:
+  - {fileID: 21300000, guid: c5c54207405f4e54781a23a0fd3fd93e, type: 3}
+  - {fileID: 21300000, guid: c53487832c77a2c4286fcaacf4fe2337, type: 3}
+  - {fileID: 21300000, guid: 65358514a625c0e44bde4e861da131df, type: 3}
+  solvedBlocksCount: 0
 --- !u!1 &1673273829
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,7 +4356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805094403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0.22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1897167055}
@@ -4601,8 +4699,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stripeObjectsXpos: []
   stripes: []
-  desiredPos: {x: 0, y: 0, z: 0}
   addedStripes: 0
+  stripeParent: []
 --- !u!212 &1897167057
 SpriteRenderer:
   m_ObjectHideFlags: 0
