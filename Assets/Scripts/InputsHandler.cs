@@ -63,7 +63,7 @@ public class InputsHandler : MonoBehaviour
         {
             isDragging = false;
             blockService.PlaceSelectedBlock();
-            blockService.ProblemBlockStripesPosCheck();
+            blockService.ProblemBlockAddStripes();
 
         }
     }
